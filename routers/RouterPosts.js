@@ -19,7 +19,10 @@ router.get("/index", function (req, res) {
 // Creo una rotta /show/:id che restituisca un singolo post
 router.get("/show/:id", function (req, res) {
 
-    const post = posts[req.params.id];
+    // converto l'id ricevuto in un numero intero
+    const id = parseInt(req.params.id)
+    // attraverso il metodo find cerco l'eleemnto corrispondente a quello richiesto confrontando gli id
+    const post = posts.find(post => post.id === id);
     // invio la risposta con il json relativo
     res.json(post);
 })
