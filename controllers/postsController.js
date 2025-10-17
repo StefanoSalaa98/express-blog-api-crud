@@ -6,10 +6,15 @@ function index(req, res) {
     let filteredposts = posts;
 
     // Se la richiesta contiene un filtro, allora filtro il posts tramite i metodi filter ed includes
-    if (req.query.ingredient) {
-        filteredposts = posts.filter(
-            post => post.ingredients.includes(req.query.ingredient)
-        );
+    if (req.query.tag) {
+        filteredposts = posts.filter(post => {
+            // rendo il primo carattere maiuscolo e tutti quelli successivi minuscoli per poter confrontare la stringa con i tag dei posts
+            query = req.query.tag[0].toUpperCase()
+            for (i = 1; i < req.query.tag.length; i++) {
+                query += req.query.tag[i].toLowerCase();
+            }
+            return post.tags.includes(query)
+        });
     }
 
     // restituisco la variabile filteredposts che contiene il posts filtrato
