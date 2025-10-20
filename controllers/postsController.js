@@ -87,7 +87,7 @@ function update(req, res) {
         })
     }
 
-    // Aggiorno la pizza
+    // Aggiorno il post
     post.title = req.body.title;
     post.content = req.body.content;
     post.image = req.body.image;
@@ -101,7 +101,34 @@ function update(req, res) {
 }
 
 function modify(req, res) {
-    res.send('Modifica parziale del post ' + req.params.id);
+    // recupero l'id dall' URL e lo converto in numero per poterlo confrontare con gli altri id
+    const id = parseInt(req.params.id)
+
+    // cerco il post tramite l'id che mi è stato inviato
+    const post = posts.find(post => post.id === id);
+
+    // controllo se il post è stato trovato, altrimenti comunico l'errore
+    if (!post) {
+        res.status(404);
+
+        return res.json({
+            error: "Not Found",
+            message: "post non trovata"
+        })
+    }
+
+    // Aggiorno il post
+    // Se un certo campo è stato inviato, allora aggiorno il nuovo valore, altrimenti mantengo quello originale
+    req.body.title ? post.title = req.body.title : post.title = post.title;
+    req.body.content ? post.content = req.body.content : post.content = post.content;
+    req.body.image ? post.image = req.body.image : post.image = post.image;
+    req.body.tags ? post.tags = req.body.tags : post.tags = post.tags;
+
+    // Controllo la lista dei posts
+    console.log(posts)
+
+    // Restituisco il post aggiornato
+    res.json(post);
 }
 
 function destroy(req, res) {
