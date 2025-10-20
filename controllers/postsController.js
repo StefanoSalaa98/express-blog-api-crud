@@ -46,7 +46,12 @@ function show(req, res) {
 }
 
 function store(req, res) {
-    res.send('Creazione nuovo post');
+
+    const newPost = req.body;
+
+    // Controllo se ho letto il post inviato
+    console.log(newPost);
+    res.send(newPost);
 }
 
 function update(req, res) {

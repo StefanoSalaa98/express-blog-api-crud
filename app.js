@@ -7,6 +7,9 @@ const app = express();
 // imposto il numero della porta
 const port = 3000;
 
+// registro il body-parser per "application/json"
+app.use(express.json());
+
 // importo il modulo del router per i posts
 const postRouter = require("./routers/RouterPosts.js")
 
