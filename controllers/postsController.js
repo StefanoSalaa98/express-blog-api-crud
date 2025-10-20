@@ -71,7 +71,23 @@ function store(req, res) {
 }
 
 function update(req, res) {
-    res.send('Modifica integrale del post ' + req.params.id);
+    // recupero l'id dall' URL e lo converto in numero per poterlo confrontare con gli altri id
+    const id = parseInt(req.params.id)
+
+    // cerco il post tramite l'id che mi è stato inviato
+    const post = posts.find(post => post.id === id);
+
+    // Aggiorno la pizza
+    post.title = req.body.title;
+    post.content = req.body.content;
+    post.image = req.body.image;
+    post.tags = req.body.tags;
+
+    // Controllo la lista dei posts
+    console.log(posts)
+
+    // Restituisco il post aggiornato
+    res.json(post);
 }
 
 function modify(req, res) {
