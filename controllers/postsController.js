@@ -47,10 +47,26 @@ function show(req, res) {
 
 function store(req, res) {
 
-    const newPost = req.body;
+    // Creo un nuovo id incrementando l'ultimo id presente (soluzione deprecabile, successivamente saranno i database a gestire gli id per noi)
+    const newId = posts[posts.length - 1].id + 1;
+
+    // Creo un nuovo oggetto post
+    const newPost = {
+        id: newId,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+    }
+
+    // Aggiungo il nuova post alla lista dei posts
+    posts.push(newPost);
+
+    // controllo che sia stato inserito stampando l'intera lista
+    console.log(posts);
+
 
     // Controllo se ho letto il post inviato
-    console.log(newPost);
     res.send(newPost);
 }
 
