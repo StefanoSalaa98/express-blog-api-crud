@@ -10,8 +10,11 @@ const port = 3000;
 // registro il body-parser per "application/json"
 app.use(express.json());
 
-// importo il middleware di checkTime
+// importo globalmente il middleware di checkTime
 const checkTime = require("./middlewares/checkTime.js");
+
+// importo globalmente il middleware che gestisce errore per rotta inesistente
+const notFound = require("./middlewares/notFound.js");
 
 // importo il modulo del router per i posts
 const postRouter = require("./routers/RouterPosts.js")
@@ -29,6 +32,10 @@ app.use("/posts", postRouter);
 app.get("/", (req, res) => {
     res.send('<h1> Server del mio blog </h1>')
 })
+
+// richiamo middleware gestione errore 404 rotta non esistente
+// deve essere richiamato dopo le rotte
+app.use(notFound);
 
 // metto in ascolto il server sulla porta definita
 app.listen(port, () => {

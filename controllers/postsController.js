@@ -34,10 +34,10 @@ function show(req, res) {
         //Imposto lo status 404
         res.status(404)
 
-        // Restituisco un JSON con le altre informazioni (posso scrivere quello che voglio)
+        // // Restituisco un JSON con le altre informazioni (posso scrivere quello che voglio)
         return res.json({
             error: "Not Found",
-            message: "post non trovata"
+            message: "post non trovato"
         })
     }
 
@@ -113,7 +113,7 @@ function modify(req, res) {
 
         return res.json({
             error: "Not Found",
-            message: "post non trovata"
+            message: "post non trovato"
         })
     }
 
