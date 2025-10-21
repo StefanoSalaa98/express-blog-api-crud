@@ -5,6 +5,9 @@ function index(req, res) {
     // Il posts filtrato di partenza corrisponde a quello originale
     let filteredposts = posts;
 
+    // codice errato per controllare funzionamento middleware errorServer
+    test.controllo();
+
     // Se la richiesta contiene un filtro, allora filtro il posts tramite i metodi filter ed includes
     if (req.query.tag) {
         filteredposts = posts.filter(post => {

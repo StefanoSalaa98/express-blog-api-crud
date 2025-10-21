@@ -16,6 +16,9 @@ const checkTime = require("./middlewares/checkTime.js");
 // importo globalmente il middleware che gestisce errore per rotta inesistente
 const notFound = require("./middlewares/notFound.js");
 
+// importo globalmente il middleware che gestisce l'errore del server
+const errorServer = require("./middlewares/errorServer");
+
 // importo il modulo del router per i posts
 const postRouter = require("./routers/RouterPosts.js")
 
@@ -33,9 +36,12 @@ app.get("/", (req, res) => {
     res.send('<h1> Server del mio blog </h1>')
 })
 
-// richiamo middleware gestione errore 404 rotta non esistente
+// richiamo middleware gestione errore per rotta non esistente
 // deve essere richiamato dopo le rotte
 app.use(notFound);
+
+// richiamo middleware gestione errori del server
+app.use(errorServer);
 
 // metto in ascolto il server sulla porta definita
 app.listen(port, () => {
