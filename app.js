@@ -10,11 +10,17 @@ const port = 3000;
 // registro il body-parser per "application/json"
 app.use(express.json());
 
+// importo il middleware di checkTime
+const checkTime = require("./middlewares/checkTime.js");
+
 // importo il modulo del router per i posts
 const postRouter = require("./routers/RouterPosts.js")
 
 // uso il middleware static di express per rendere disponibile i file statici
 app.use(express.static('public'));
+
+//middleware chekTime registrato per tutte le rotte a livello globale
+app.use(checkTime);
 
 // rotte per i posts
 app.use("/posts", postRouter);
