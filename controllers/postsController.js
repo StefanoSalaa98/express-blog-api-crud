@@ -50,6 +50,10 @@ function show(req, res) {
 
 function store(req, res) {
 
+    // Leggo il valore dell'header Content-Type
+    const contentType = req.get('Content-Type');
+    console.log(contentType);
+
     // Creo un nuovo id incrementando l'ultimo id presente (soluzione deprecabile, successivamente saranno i database a gestire gli id per noi)
     const newId = posts[posts.length - 1].id + 1;
 
